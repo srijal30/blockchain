@@ -2,7 +2,7 @@ import socket
 
 server = socket.socket()
 
-server.bind( ( socket.gethostname() , 6969) )
+server.bind( ( socket.gethostname() , 7000) )
 server.listen()
 
 input("PRESS ENTER")
