@@ -1,6 +1,5 @@
 import hashlib
 
-from numpy import block
 from chain.block import Block
 from chain.helpers import gen_merkle, hash_key
 
