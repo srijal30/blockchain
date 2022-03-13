@@ -26,6 +26,7 @@ def handle_client(client, ):
 connections = {}
 
 #CONTINOUSLY LISTEN FOR CONNECTIONS
+server.listen()
 while True:
     connection, address = server.accept()
     print( connection, address )
