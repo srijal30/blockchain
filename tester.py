@@ -43,7 +43,7 @@ for i in range(10):
     #find the block data
     merkle = gen_merkle(trans)
     nonce = 0
-    while sha256( (chain.blocks[-1].hash+merkle+hash_key(rpub)+str(nonce)).encode() ).hexdigest()[:3] != "0"*3:
+    while sha256( (chain.blocks[-1].hash+merkle+hash_key(rpub)+str(nonce)).encode() ).hexdigest()[:chain.difficulty] != "0"*chain.difficulty:
         nonce+=1
 
     #add the block to the chain
