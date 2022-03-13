@@ -1,16 +1,39 @@
+#functionality needed
+
+#receiving jsons
+#sending jsons
+#connecting to nodes
+#disconnecting from nodes
+
+import threading
 import socket
 
+#CONSTANTS
+PORT = 7000
+IP = socket.gethostbyname( socket.gethostname() )
+ADDRESS = (IP, PORT)
+
+#create the server
 server = socket.socket()
+server.bind( ADDRESS )
 
-server.bind( ( socket.gethostname() , 7000) )
-server.listen()
+#helper methods
+def handle_client(client, ):
+    connected = True
+    while connected:
+        pass
 
-input("PRESS ENTER")
+connections = {}
 
+#CONTINOUSLY LISTEN FOR CONNECTIONS
 while True:
-    clientsocket, address = server.accept()
-    print( f"connection from {address} has been made" )
+    connection, address = server.accept()
+    print( connection, address )
     
-    clientsocket.send(bytes("hello!", "utf-8") )
+    #thread = threading.Thread(target=handle_client, args=( connection, address) )
+    #handle_client(connection, address)
+
+    
+
 
 
