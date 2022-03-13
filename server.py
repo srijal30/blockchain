@@ -14,6 +14,3 @@ while True:
     clientsocket.send(bytes("hello!", "utf-8") )
 
 
-def send_data( address ):
-    clientsocket.send
-

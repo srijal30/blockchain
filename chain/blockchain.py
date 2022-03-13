@@ -1,6 +1,8 @@
 import hashlib
+
+from numpy import block
 from chain.block import Block
-from chain.helpers import gen_merkle
+from chain.helpers import gen_merkle, hash_key
 
 #FOR THE FUTURE:
 # add change difficulty
@@ -45,13 +47,26 @@ class Blockchain():
             if self.blocks[index].p_hash != self.blocks[index-1].hash:
                 return False
             #check if block has valid transactions
-            if not self.blocks[index].valid_transactions():
+            if not self.blocks[index].valid_transactions(self):
                 return False
         return True
 
     #LENGTH: return the amount of blocks <-- ? is this necasarry?
     def length(self):
         return len( self.blocks )
+
+    #GET BALANCE: get balance for a certain address
+    def get_balance(self, address):
+        amount = 0
+        #check each block
+        for block in self.blocks:
+            #check each transaction in a block
+            for transaction in block.transactions:
+                if hash_key(transaction.receiver) == address:
+                    amount += transaction.amount
+                if hash_key(transaction.sender) == address:
+                    amount -= transaction.amount
+        return amount
 
     #TO STRING
     def __str__(self):

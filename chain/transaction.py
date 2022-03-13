@@ -1,8 +1,11 @@
 from hashlib import sha256
 import rsa
-from chain.helpers import gen_merkle, hash_key
+from chain.helpers import hash_key
 
 #NOTE THE HASHES HERE WILL BE IN BYTES DUE TO RSA MODULE REQUIRING SO
+
+#MINTING KEY
+mint_public = hash_key( rsa.PublicKey._load_pkcs1_pem( open("chain/minting_pub.pem").read() ) )
 
 #class transaction
 class Transaction():
@@ -27,19 +30,21 @@ class Transaction():
         h.update( hash_key(self.receiver).encode() ) #hash of public key of receiver
         return h.digest()
     
-    #IS VALID: checks if transaction is valid
-    def is_valid(self):
-        #first check if signature is valid
+    #IS VALID: checks if transaction is valid... you have to input the chain you are checking in
+    def is_valid(self, chain):
+        #check if signature is valid
         try: 
             rsa.verify( self.gen_hash(), self.signature, self.sender )
         except:
             return False #if error occurs, then return false
-        #check if the amount is valid
-        
-        #add code to check if it is mint key, then it doesnt matter
-        
-        #return true at the end
-        return True
+
+        #first check if it is minting key (no need to check balance)
+        if hash_key(self.sender) == mint_public:
+            return True
+
+        #check if the balance of sender is enough
+        return chain.get_balance( hash_key(self.sender) ) >= self.amount
+
         
     #TO STRING: prints out transaction in this format "amount:from:sender-to-receiver"
     def __str__(self):

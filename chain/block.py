@@ -2,7 +2,7 @@ import hashlib
 from chain.helpers import gen_merkle
 
 #FOR THE FUTURE:
-# add json dump
+# add json dump (maybe even pickle)
 # make data into dictonary
 # maybe validate merkle?
  
@@ -30,13 +30,13 @@ class Block():
 
     #IS VALID: checks if data matches hash and if transactions are valid
     #VALID TRANSACTIONS: returns true only if all the transactions are valid   
-    def valid_transactions(self):
+    def valid_transactions(self, chain):
         #checks the merkle root
         if gen_merkle(self.transactions) != self.merkle:
             return False
         #check transactions individually
         for transaction in self.transactions:
-            if not transaction.is_valid():
+            if not transaction.is_valid(chain):
                 return False
         #return true at the end
         return True
