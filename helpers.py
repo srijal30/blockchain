@@ -22,7 +22,3 @@ def gen_merkle(transactions):
 def hash_key(key):
     digits = key["n"]
     return sha256( str(digits).encode() ).hexdigest()
-
-
-
-

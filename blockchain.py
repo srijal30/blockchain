@@ -61,7 +61,6 @@ class Blockchain():
             result += str(block) + "\n\n"
         return result
 
-
 #TESTS
 if __name__ == "__main__":
     chain = Blockchain()

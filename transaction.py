@@ -81,8 +81,10 @@ if __name__ == "__main__":
         chain.add_block( trans , hash_key(rpub) ,nonce)
     #check if chain is valid
     print( chain.is_valid() )
+    print( chain )
     #alter chain
     chain.blocks[2].transactions[3].receiver = spub
     #check if valid
     print( chain.is_valid() )
+
 
