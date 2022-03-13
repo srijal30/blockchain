@@ -1,6 +1,6 @@
 import hashlib
-from block import Block
-from helpers import gen_merkle
+from chain.block import Block
+from chain.helpers import gen_merkle
 
 #FOR THE FUTURE:
 # add change difficulty
@@ -61,8 +61,3 @@ class Blockchain():
             result += str(block) + "\n\n"
         return result
 
-#TESTS
-if __name__ == "__main__":
-    chain = Blockchain()
-    print( chain.is_valid() )
-    print( chain )

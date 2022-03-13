@@ -1,6 +1,6 @@
 from hashlib import sha256
 
-#GENERATE MERKLE: creates a merkle
+#GENERATE MERKLE: creates a merkle (uses a merge sort algo)
 def gen_merkle(transactions):
     #if no transactions
     if len(transactions) == 0:

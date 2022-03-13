@@ -1,5 +1,5 @@
 import hashlib
-from helpers import gen_merkle
+from chain.helpers import gen_merkle
 
 #FOR THE FUTURE:
 # add json dump
@@ -53,9 +53,4 @@ class Block():
         result += "CREATOR: " + self.creator + "\n"
         result += "NONCE: " + str(self.nonce) + "\n"
         return result
-
-#TESTS
-if __name__ == "__main__":
-    pass
-
 

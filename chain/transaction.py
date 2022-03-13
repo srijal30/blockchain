@@ -1,6 +1,8 @@
-from helpers import gen_merkle, hash_key
 from hashlib import sha256
 import rsa
+from chain.helpers import gen_merkle, hash_key
+
+#NOTE THE HASHES HERE WILL BE IN BYTES DUE TO RSA MODULE REQUIRING SO
 
 #class transaction
 class Transaction():
@@ -48,43 +50,3 @@ class Transaction():
         result += "\tSIGNATURE: " + self.signature.hex() + "\n"
         result += "\tHASH: " + self.hash.hex() + "\n"
         return result
-
-#TESTING
-if __name__ == "__main__":
-    #sender keygen
-    (spub, spriv) = rsa.newkeys(600)
-    #receiver keygen
-    (rpub, rpriv) = rsa.newkeys(600)
-
-    from blockchain import Blockchain
-    chain = Blockchain()
-    
-    #create 10 blocks
-    for i in range(10):
-        #create 10 transactions
-        trans = []
-        for amt in range(0, 1000, 100):
-            message =  str(amt+i) + hash_key(spub) + hash_key(rpub)
-            #append the data
-            message = sha256( message.encode() ).digest() #<--- we need it to be in bytes format
-            #sign the data
-            signature = rsa.sign( message, spriv, 'SHA-256')
-            #create transaction
-            trans.append( Transaction( amt+i, spub, rpub, signature ) )
-        #generate the merkle
-        merkle = gen_merkle(trans)
-        #find the nonce
-        nonce = 0
-        while sha256( (chain.blocks[-1].hash+merkle+hash_key(rpub)+str(nonce)).encode() ).hexdigest()[:3] != "0"*3:
-            nonce+=1
-        #add the block
-        chain.add_block( trans , hash_key(rpub) ,nonce)
-    #check if chain is valid
-    print( chain.is_valid() )
-    print( chain )
-    #alter chain
-    chain.blocks[2].transactions[3].receiver = spub
-    #check if valid
-    print( chain.is_valid() )
-
-

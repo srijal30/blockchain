@@ -1,6 +1,6 @@
-from block import Block
-from blockchain import Blockchain
-from transaction import Transaction
+from chain.block import Block
+from chain.blockchain import Blockchain
+from chain.transaction import Transaction
 
 import rsa
 
