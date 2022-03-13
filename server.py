@@ -9,7 +9,7 @@ import threading
 import socket
 
 #CONSTANTS
-PORT = 7000
+PORT = 6969
 IP = socket.gethostbyname( socket.gethostname() )
 ADDRESS = (IP, PORT)
 

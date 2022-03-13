@@ -1,7 +1,7 @@
 import socket
 
 client = socket.socket()
-client.connect( ("18.117.217.121", 7000) )
+client.connect( ("18.117.217.121", 6969) )
 
 client.close()
 
