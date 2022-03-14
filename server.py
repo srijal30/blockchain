@@ -17,7 +17,8 @@ ADDRESS = (IP, PORT)
 server = socket.socket()
 server.bind( ADDRESS )
 
-#helper methods
+#METHODS
+#HANDLE CLIENT: handles a certain client
 def handle_client(client, ):
     connected = True
     while connected:

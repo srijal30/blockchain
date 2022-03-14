@@ -11,7 +11,7 @@ from chain.helpers import gen_merkle, hash_key
 class Blockchain():
     #INSTANCE
     blocks = []
-    difficulty = 3
+    difficulty = 5
 
     #CONSTRUCTOR
     def __init__(self):
