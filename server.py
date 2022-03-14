@@ -17,14 +17,14 @@ IP = socket.gethostbyname( socket.gethostname() )
 OTHERIP = input("what is the ip: ")
 
 #create the server for listening
-server = socket.socket()
-server.bind( ("0.0.0.0", SPORT) )
+sock = socket.socket()
+sock.bind( ("0.0.0.0", SPORT) )
 print( "binded source port...")
 
 input("press enter to continue: ")
 
 #punch hole
-server.sendto( b'hole', ( OTHERIP, DPORT) )
+sock.sendto( b'hole', (OTHERIP, DPORT) )
 print( "sent hole punch" )
 
 
