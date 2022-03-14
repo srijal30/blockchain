@@ -21,6 +21,8 @@ server = socket.socket()
 server.bind( ("0.0.0.0", SPORT) )
 print( "binded source port...")
 
+input("press enter to continue: ")
+
 #punch hole
 server.sendto( b'hole', ( OTHERIP, DPORT) )
 print( "sent hole punch" )
