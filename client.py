@@ -8,6 +8,8 @@ client.close()
 
 exit()
 
+
+
 from chain.block import Block
 from chain.blockchain import Blockchain
 from chain.transaction import Transaction
